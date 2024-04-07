@@ -42,7 +42,7 @@ class Viaje{
     private $objPasajeros;
     
     // Metodo Constructor
-    public function __construct($codigoViaje, $destinoViaje, $cantMax, Pasajero $pasajeros){
+    public function __construct($codigoViaje, $destinoViaje, $cantMax, $pasajeros){
 
         // Inicialiazion de los Valores
         $this->codigo = $codigoViaje;
