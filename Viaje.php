@@ -40,15 +40,17 @@ class Viaje{
     private $destino;
     private $cantMaximaPasajeros;
     private $objPasajeros;
+    private $objResponsableViaje;
     
     // Metodo Constructor
-    public function __construct($codigoViaje, $destinoViaje, $cantMax, $pasajeros){
+    public function __construct($codigoViaje, $destinoViaje, $cantMax, $pasajeros, $responsableViaje){
 
         // Inicialiazion de los Valores
         $this->codigo = $codigoViaje;
         $this->destino = $destinoViaje;
         $this->cantMaximaPasajeros = $cantMax;
         $this->objPasajeros = $pasajeros;
+        $this->objResponsableViaje = $responsableViaje;
 
     }
 
@@ -69,11 +71,16 @@ class Viaje{
         return $this->objPasajeros;
     }
 
+    public function getObjResponsableViaje(){
+        return $this->objResponsableViaje;
+    }
+
     // Metodo toString
     public function __toString(){
         
         // Inicializacion
         $pasajeros = $this->getObjPasajeros();
+        $resPersona = $this->getObjResponsableViaje();
 
         $info = "\nInformacion del Viaje Feliz:\n";
         $info .= "  Codigo del Viaje: " . $this->getCodigoViaje() . ".\n";
@@ -84,8 +91,14 @@ class Viaje{
             $info .= "       Pasajero N°" . ($i + 1) . ":\n";
             $info .= "       Nombre: " . $pasajeros[$i]->getNombre() . ".\n";
             $info .= "       Apellido: " . $pasajeros[$i]->getApellido() . ".\n";
-            $info .= "       Numero de DNI:" . $pasajeros[$i]->getNroDni() . ".\n\n";
+            $info .= "       Numero de DNI: " . $pasajeros[$i]->getNroDni() . ".\n";
+            $info .= "       Numero de Telefono: " . $pasajeros[$i]->getTelefono() . ".\n\n";
         }
+        $info .= "  Informacion de la Persona Responsable de Realizar el Viaje:\n\n";
+        $info .= "     Nombre: " . $resPersona->getNombreEmpleado() . ".\n";
+        $info .= "     Apellido: " . $resPersona->getApellidoEmpleado() . ".\n";
+        $info .= "     Numero de Licencia: " . $resPersona->getNroLicencia() . ".\n";
+        $info .= "     Numero de Empleado: " . $resPersona->getNroEmpleado() . ".\n\n";
 
         return $info;
 
