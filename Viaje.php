@@ -81,9 +81,10 @@ class Viaje{
         $info .= "  Cantidad Max de Pasajeros: " . $this->getCantMaximaPasajeros() . ".\n";
         $info .= "  Informacion de Pasajeros:\n\n";
         for ($i = 0; $i < $this->getCantMaximaPasajeros(); $i++){
-            $info .= "       Pasajero N°" . ($i + 1) . ":" . $pasajeros[$i]->getNombre() . ".\n";
-            $info .= "       Pasajero N°" . ($i + 1) . ":" . $pasajeros[$i]->getApellido() . ".\n";
-            $info .= "       Pasajero N°" . ($i + 1) . ":" . $pasajeros[$i]->getNroDni() . ".\n\n";
+            $info .= "       Pasajero N°" . ($i + 1) . ":\n";
+            $info .= "       Nombre: " . $pasajeros[$i]->getNombre() . ".\n";
+            $info .= "       Apellido: " . $pasajeros[$i]->getApellido() . ".\n";
+            $info .= "       Numero de DNI:" . $pasajeros[$i]->getNroDni() . ".\n\n";
         }
 
         return $info;
