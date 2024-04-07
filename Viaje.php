@@ -76,14 +76,14 @@ class Viaje{
         $pasajeros = $this->getObjPasajeros();
 
         $info = "\nInformacion del Viaje Feliz:\n";
-        $info .= "Codigo del Viaje: " . $this->getCodigoViaje() . ".\n";
-        $info .= "Destino del Viaje: " . $this->getDestino() . ".\n";
-        $info .= "Cantidad Max de Pasajeros: " . $this->getCantMaximaPasajeros() . ".\n";
-        $info .= "Informacion de Pasajeros:\n";
+        $info .= "  Codigo del Viaje: " . $this->getCodigoViaje() . ".\n";
+        $info .= "  Destino del Viaje: " . $this->getDestino() . ".\n";
+        $info .= "  Cantidad Max de Pasajeros: " . $this->getCantMaximaPasajeros() . ".\n";
+        $info .= "  Informacion de Pasajeros:\n\n";
         for ($i = 0; $i < $this->getCantMaximaPasajeros(); $i++){
-            $info .= "     Pasajero N°" . $i . ":" . $pasajeros[$i]->getNombre() . ".\n";
-            $info .= "     Pasajero N°" . $i . ":" . $pasajeros[$i]->getApellido() . ".\n";
-            $info .= "     Pasajero N°" . $i . ":" . $pasajeros[$i]->getNroDni() . ".\n\n";
+            $info .= "       Pasajero N°" . ($i + 1) . ":" . $pasajeros[$i]->getNombre() . ".\n";
+            $info .= "       Pasajero N°" . ($i + 1) . ":" . $pasajeros[$i]->getApellido() . ".\n";
+            $info .= "       Pasajero N°" . ($i + 1) . ":" . $pasajeros[$i]->getNroDni() . ".\n\n";
         }
 
         return $info;
