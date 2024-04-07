@@ -86,6 +86,8 @@ class Viaje{
             $info .= "     Pasajero N°" . $i . ":" . $pasajeros[$i]->getNroDni() . ".\n\n";
         }
 
+        return $info;
+
     }
 
 }

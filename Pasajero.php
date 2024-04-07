@@ -36,8 +36,10 @@ class Pasajero{
         $info = "\nNombre de Pasajero: " . $this->getNombre() . ".\n";
         $info .= "Apellido de Pasajero: " . $this->getApellido() . ".\n";
         $info .= "Numero de DNI de Pasajero: " . $this->getNroDni() . ".\n";
+
+        return $info;
     }
-    
+
 }
 
 ?>
