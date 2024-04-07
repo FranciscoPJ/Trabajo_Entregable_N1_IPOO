@@ -11,8 +11,8 @@ $personaTres = new Pasajero("Rodrigo", "Blanca", "87654321", "2994569832");
 // Arreglo de Listado de Pasajeros
 $ArregloPasajero = [];
 $ArregloPasajero[0] = $personaUno;
-$ArregloPasajero[1] = $personaDos; 
-$ArregloPasajero[2] = $personaTres; 
+$ArregloPasajero[1] = $personaDos;
+$ArregloPasajero[2] = $personaTres;
 
 // Objeto Persona Responsable de Realizar el Viaje
 $personaResponsable = new ResponsableV("20", "123456789", "Pedro", "Torres");
@@ -20,48 +20,66 @@ $personaResponsable = new ResponsableV("20", "123456789", "Pedro", "Torres");
 // Objeto Viaje
 $viaje = new Viaje(2024090420, "Futaleufu", count($ArregloPasajero), $ArregloPasajero, $personaResponsable);
 
-// Muestra de valores inciales
-echo $viaje;
+// Inicio del Programa------------------------------
 
-// Modificar Informacion de un Pasajero
-$viaje->corregirInformacion("Lucas", "Stuart", "2995432134", 1);
-$viaje->corregirInformacion("Ezequiel", "Gonzales", "2997658909", 2);
-$viaje->corregirInformacion("Federico", "Kano", "2991234567", 3);
+do {
+    echo "\nBienvenido al Sistema de Gestión de Viajes!\n";
+    echo "1. Cargar información del viaje\n";
+    echo "2. Modificar datos del pasajero\n";
+    echo "3. Agregar pasajero\n";
+    echo "4. Mostrar datos del viaje\n";
+    echo "5. Salir\n";
+    $num = trim(fgets(STDIN)); // se elige un numero del menu
 
-// Muestra de valores Modificados
-echo "\n--------------- Muestra de Informacion Modificada: ---------------\n" . $viaje;
+    switch ($num) {
+        case 1:
+            // Cargar información del viaje
+            // Ya las variables instancia del viaje estan creadas
+            echo "Información del viaje cargada.\n";
+            echo $viaje;
+            break;
+        case 2:
+            // Modificar datos del pasajero
+            // Modificar Informacion de un Pasajero
+            $viaje->corregirInformacion("Lucas", "Stuart", "2995432134", 1);
+            $viaje->corregirInformacion("Ezequiel", "Gonzales", "2997658909", 2);
+            $viaje->corregirInformacion("Federico", "Kano", "2991234567", 3);
+            echo "Los Datos se modificaron.\n";
+            break;
+        case 3:
+            // Agregar un Nuevo Pasajero
+            echo "Ingrese Nombre: ";
+            $nombre = trim(fgets(STDIN));     // Se introduce un nuevo nombre
 
-// Agregar un Nuevo Pasajero
-echo "Ingrese Nombre: ";
-$nombre = trim(fgets(STDIN));
+            echo "Ingrese Apellido: ";
+            $apellido = trim(fgets(STDIN));     // Se introduce un nuevo apellido
 
-echo "Ingrese Apellido: ";
-$apellido = trim(fgets(STDIN));
+            echo "Ingrese Numero de DNI: ";
+            $nroDni = trim(fgets(STDIN));     // Se introduce un nuevo DNI
 
-echo "Ingrese Numero de DNI: ";
-$nroDni = trim(fgets(STDIN));
+            echo "Ingrese Numero de Telefono: ";
+            $nroTelefono = trim(fgets(STDIN));     // Se introduce un nuevo telefono
 
-echo "Ingrese Numero de Telefono: ";
-$nroTelefono = trim(fgets(STDIN));
+            // creacion de un nuevo objeto pasajero
+            $nuevoPasajero = new Pasajero($nombre, $apellido, $nroDni, $nroTelefono);
 
-// nuevo objeto pasajero ("Manuel", "Perez", "205678906", "2995433098")
-$nuevoPasajero = new Pasajero($nombre, $apellido, $nroDni, $nroTelefono);
+            // Valor booleano (false = se puede agregar. True no se puede agregar)
+            $res = $viaje->agregarPasajero($nuevoPasajero);
 
-// se agrega el nuevo pasajero a la lista del viaje de pasajeros
-echo "\nAgregar Pasajero:\n";
-
-// Valor booleano (false = se puede registrar. True no se puede registrar)
-$res = $viaje->agregarPasajero($nuevoPasajero);
-
-if($res == false){
-    echo "\nSe agrego en la lista el nuevo pasajero!\n\n";
-    $ArregloPasajero[count($ArregloPasajero)] = $viaje->getObjPasajeros()[count($ArregloPasajero)];
-}
-else{
-    echo "\n--------------- Esta informacion es invalida! ---------------\n";
-}
-
-// Se visualiza el nuevo pasajero en la lista
-echo $viaje;
-
+            if ($res == false) {
+                echo "\n--------------- Se agrego en la lista el nuevo pasajero! ---------------\n\n";
+                $ArregloPasajero[count($ArregloPasajero)] = $viaje->getObjPasajeros()[count($ArregloPasajero)];
+            } else {
+                echo "\n--------------- Esta informacion es invalida! ---------------\n";
+            }
+            break;
+        case 4:
+            //Mostrar datos del viaje
+            echo $viaje;
+            break;
+        default;
+            echo "\nFin del Menu.\n";
+            break;
+    }
+} while ($num !=5);
 ?>

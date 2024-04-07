@@ -122,8 +122,8 @@ class Viaje{
         // Recorrido para verifiacar si los datos no estan existente
         while($i < $countPasajeros && !$encontrado){
 
-            // Si nombre, apellido y nroDni son iguales, no se guarda el nuevo pasajero (true). Se guarda caso contrario (false).
-            if($personas[$i]->getNombre() == $nuevoPasajero->getNombre() && $personas[$i]->getApellido() == $nuevoPasajero->getApellido() && $personas[$i]->getNroDni() == $nuevoPasajero->getNroDni()){
+            // Si nroDni son iguales, no se guarda el nuevo pasajero (true). Se guarda caso contrario (false).
+            if($personas[$i]->getNroDni() == $nuevoPasajero->getNroDni()){
 
                 $encontrado = true; // verifica que existe el pasajero en la lista
 
@@ -155,8 +155,7 @@ class Viaje{
         $pasajeros = $this->getObjPasajeros();
         $resPersona = $this->getObjResponsableViaje();
 
-        $info = "\nInformacion del Viaje Feliz:\n\n";
-        $info .= "  Codigo del Viaje: " . $this->getCodigoViaje() . ".\n\n";
+        $info = "\nCodigo del Viaje: " . $this->getCodigoViaje() . ".\n\n";
         $info .= "  Destino del Viaje: " . $this->getDestino() . ".\n\n";
         $info .= "  Cantidad Max de Pasajeros: " . $this->getCantMaximaPasajeros() . ".\n\n";
         $info .= "  Informacion de Pasajeros:\n\n";
