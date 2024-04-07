@@ -36,6 +36,23 @@ class Pasajero{
         return $this->telefono;
     }
 
+    // Metodos de Acceso Set
+    public function setNombre($nuevoNombre){
+        return $this->nombre = $nuevoNombre;
+    }
+
+    public function setApellido($nuevoApellido){
+        return $this->apellido = $nuevoApellido;
+    }
+
+    public function setNroDni($nuevoDni){
+        return $this->nroDni = $nuevoDni;
+    }
+
+    public function setTelefono($nuevoNumero){
+        return $this->telefono = $nuevoNumero;
+    }
+
     // Metodo toString
     public function __toString(){
         

@@ -75,6 +75,20 @@ class Viaje{
         return $this->objResponsableViaje;
     }
 
+    // Metodo Corregir Informacion de Pasajero
+    public function corregirInformacion($nombre, $apellido, $telefono, $nroPersona){
+
+        // inicializacion
+        $personas = $this->getObjPasajeros(); // arreglo de personas
+        $num = $nroPersona - 1;
+
+        // Actualizacion de Informacion de Pasajero Asignado
+        $personas[$num]->setNombre($nombre);
+        $personas[$num]->setApellido($apellido);
+        $personas[$num]->setTelefono($telefono);
+
+    }
+
     // Metodo toString
     public function __toString(){
         

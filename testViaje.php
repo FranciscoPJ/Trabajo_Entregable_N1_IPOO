@@ -16,7 +16,16 @@ $ArregloPasajero[2] = $personaTres;
 
 $viaje = new Viaje(2024090420, "Futaleufu", count($ArregloPasajero), $ArregloPasajero, $personaResponsable);
 
+// Muestra de valores inciales
 echo $viaje;
+
+// Modificar Informacion de un Pasajero
+$viaje->corregirInformacion("Lucas", "Stuart", "2995432134", 1);
+$viaje->corregirInformacion("Ezequiel", "Gonzales", "2997658909", 2);
+$viaje->corregirInformacion("Federico", "Kano", "2991234567", 3);
+
+// Muestra de valores Modificados
+echo "\n--------------- Muestra de Informacion Modificada: ---------------\n" . $viaje;
 
 
 ?>
