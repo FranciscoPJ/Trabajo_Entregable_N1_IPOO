@@ -75,6 +75,27 @@ class Viaje{
         return $this->objResponsableViaje;
     }
 
+    // Metodo de Acceso Set
+    public function setCodigoViaje($nuevoCodigo){
+        return $this->codigo = $nuevoCodigo;
+    }
+
+    public function setDestino($nuevoDestino){
+        return $this->destino = $nuevoDestino;
+    }
+
+    public function setCantMaximaPasajeros($nuevaCantidad){
+        return $this->cantMaximaPasajeros = $nuevaCantidad;
+    }
+
+    public function setObjPasajeros($nuevosPasajeros){
+        return $this->objPasajeros = $nuevosPasajeros;
+    }
+
+    public function setObjResponsableViaje($nuevaPersonaR){
+        return $this->objResponsableViaje = $nuevaPersonaR;
+    }
+
     // Metodo Corregir Informacion de Pasajero
     public function corregirInformacion($nombre, $apellido, $telefono, $nroPersona){
 
@@ -86,6 +107,44 @@ class Viaje{
         $personas[$num]->setNombre($nombre);
         $personas[$num]->setApellido($apellido);
         $personas[$num]->setTelefono($telefono);
+
+    }
+
+    // Metodo Agregar Pasajero
+    public function agregarPasajero($nuevoPasajero){
+
+        // Incializacion
+        $personas = $this->getObjPasajeros();
+        $countPasajeros = $this->getCantMaximaPasajeros(); // valores del array
+        $encontrado = false;
+        $i = 0;
+
+        // Recorrido para verifiacar si los datos no estan existente
+        while($i < $countPasajeros && !$encontrado){
+
+            // Si nombre, apellido y nroDni son iguales, no se guarda el nuevo pasajero (true). Se guarda caso contrario (false).
+            if($personas[$i]->getNombre() == $nuevoPasajero->getNombre() && $personas[$i]->getApellido() == $nuevoPasajero->getApellido() && $personas[$i]->getNroDni() == $nuevoPasajero->getNroDni()){
+
+                $encontrado = true; // verifica que existe el pasajero en la lista
+
+            }
+
+            $i++; // incrementa el contador
+
+        }
+
+        if($encontrado == false){
+
+            // Formula Agregar Nuevo Pasajero a la Coleccion de Pasajeros de Viaje
+            $personas[$countPasajeros] = $nuevoPasajero;
+
+            // Metodo de Acceso Set - Actualiza la lista agregando un nuevo pasajero en el viaje
+            $this->setObjPasajeros($personas);
+            $this->setCantMaximaPasajeros(count($personas));
+
+        }
+
+        return $encontrado;
 
     }
 

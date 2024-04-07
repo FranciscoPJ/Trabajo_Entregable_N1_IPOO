@@ -36,6 +36,23 @@ class ResponsableV{
         return $this->apellidoEmpleado;
     }
 
+    // Metodos de Acceso Set
+    public function setNroEmpleado($nuevoNumero){
+        return $this->nroEmpleado = $nuevoNumero;
+    }
+
+    public function setNroLicencia($nuevaLicencia){
+        return $this->nroLicencia = $nuevaLicencia;
+    }
+
+    public function setNombreEmpleado($nuevoNombre){
+        return $this->nombreEmpleado = $nuevoNombre;
+    }
+
+    public function setApellidoEmpleado($nuevoApellido){
+        return $this->apellidoEmpleado = $nuevoApellido;
+    }
+
     // Metodo toString
     public function __toString(){
         
