@@ -117,7 +117,7 @@ class Viaje
         $o = 0;
 
         // busqueda para modifcar los datos de la persona asignada
-        while ($o < count($personas) && !$encontrado) {
+        while ($o < count($personas) && $encontrado) {
 
             if ($personas[$o]->getNroDni() == $nroDniBusqueda) {
 
@@ -129,6 +129,9 @@ class Viaje
                 $personas[$o]->setApellido($apellido);
                 $personas[$o]->setTelefono($telefono);
             }
+            
+            $o++;
+
         }
 
         return $encontrado;
@@ -164,12 +167,13 @@ class Viaje
 
         // Incializacion
         $personas = $this->getObjPasajeros();
-        $countPasajeros = $this->getCantMaximaPasajeros(); // valores del array
+        $countPasajeros = count($personas); // valores del array
+        $totalPasajerosSugerido = $this->getCantMaximaPasajeros();
         $encontrado = false;
         $i = 0;
 
         // Recorrido para verifiacar si los datos no estan existente
-        while ($i < $countPasajeros && !$encontrado) {
+        while ($i < $countPasajeros && !$encontrado && $countPasajeros < $totalPasajerosSugerido) {
 
             // Si nroDni son iguales, no se guarda el nuevo pasajero (true). Se guarda caso contrario (false).
             if ($personas[$i]->getNroDni() == $nuevoPasajero->getNroDni()) {
@@ -182,14 +186,13 @@ class Viaje
 
         }
 
-        if ($encontrado == false) {
+        if ($encontrado == false && $countPasajeros <= $totalPasajerosSugerido) {
 
             // Formula Agregar Nuevo Pasajero a la Coleccion de Pasajeros de Viaje
             $personas[$countPasajeros] = $nuevoPasajero;
 
             // Metodo de Acceso Set - Actualiza la lista agregando un nuevo pasajero en el viaje
             $this->setObjPasajeros($personas);
-            $this->setCantMaximaPasajeros(count($personas));
         }
 
         return $encontrado;
@@ -203,11 +206,12 @@ class Viaje
         $pasajeros = $this->getObjPasajeros();
         $resPersona = $this->getObjResponsableViaje();
 
-        $info = "\nCodigo del Viaje: " . $this->getCodigoViaje() . ".\n\n";
+        $info = "\nInformacion del Viaje:\n\n";
+        $info .= "  Codigo del Viaje: " . $this->getCodigoViaje() . ".\n\n";
         $info .= "  Destino del Viaje: " . $this->getDestino() . ".\n\n";
         $info .= "  Cantidad Max de Pasajeros: " . $this->getCantMaximaPasajeros() . ".\n\n";
         $info .= "  Informacion de Pasajeros:\n\n";
-        for ($i = 0; $i < $this->getCantMaximaPasajeros(); $i++) {
+        for ($i = 0; $i < count($pasajeros); $i++) {
             $info .= "       Pasajero N°" . ($i + 1) . ":\n";
             $info .= "       Nombre: " . $pasajeros[$i]->getNombre() . ".\n";
             $info .= "       Apellido: " . $pasajeros[$i]->getApellido() . ".\n";

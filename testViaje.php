@@ -18,12 +18,12 @@ $ArregloPasajero[2] = $personaTres;
 $personaResponsable = new ResponsableV("20", "123456789", "Pedro", "Torres");
 
 // Objeto Viaje
-$viaje = new Viaje(2024090420, "Futaleufu", count($ArregloPasajero), $ArregloPasajero, $personaResponsable);
+$viaje = new Viaje(2024090420, "Futaleufu", 5, $ArregloPasajero, $personaResponsable);
 
-// Inicio del Programa------------------------------
+// Inicio del Menu ------------------------------
 
 do {
-    echo "\nBienvenido al Sistema de Gestión de Viajes!\n";
+    echo "\nBienvenido al Sistema de Viaje Feliz!\n";
     echo "1. Cargar información del viaje\n";
     echo "2. Modificar datos del pasajero\n";
     echo "3. Agregar pasajero\n";
@@ -34,14 +34,28 @@ do {
 
     switch ($num) {
         case 1:
-            // Cargar información del viaje
-            echo "Información del viaje cargada.\n";
-            echo $viaje;
+            // Se muestra los datos de la información cargada del viaje
+            echo "--------------- Información del viaje cargada! ---------------\n";
+
             break;
         case 2:
             // Modificar Informacion de un Pasajero
-            $respuestaUno = $viaje->corregirInformacion("Lucas", "Stuart", "2995432134", "2995920060");
-            
+            echo "\nIngrese el numero de DNI de la persona a modificar: ";
+            $modDni = trim(fgets(STDIN));
+
+            echo "\nIngrese el numero de DNI de la persona a modificar: ";
+            $modNombre = trim(fgets(STDIN));
+
+            echo "\nIngrese el numero de DNI de la persona a modificar: ";
+            $modApellido = trim(fgets(STDIN));
+
+            echo "\nIngrese el numero de DNI de la persona a modificar: ";
+            $modTelefono = trim(fgets(STDIN));
+
+            $respuestaUno = $viaje->corregirInformacion($modNombre, $modApellido, $modTelefono, $modDni);
+
+            echo "\n--------------- Datos Modificados! ---------------\n\n";
+
             // Se envia un mensaje de la operacion
             if ($respuestaUno == false) {
                 echo "\n--------------- Se Modifico un Pasajero! ---------------\n\n";
@@ -49,49 +63,40 @@ do {
                 echo "\n--------------- No se Modifico un Pasajero! ---------------\n\n";
             }
 
-            $respuestaDos = $viaje->corregirInformacion("Ezequiel", "Gonzales", "2997658909", "2995449923");
-
-            // Se envia un mensaje de la operacion
-            if ($respuestaDos == false) {
-                echo "\n--------------- Se Modifico un Pasajero! ---------------\n\n";
-            } else {
-                echo "\n--------------- No se Modifico un Pasajero! ---------------\n\n";
-            }
-
-            $respuestaTres = $viaje->corregirInformacion("Federico", "Kano", "2991234567", "2994569832");
-
-            // Se envia un mensaje de la operacion
-            if ($respuestaTres == false) {
-                echo "\n--------------- Se Modifico un Pasajero! ---------------\n\n";
-            } else {
-                echo "\n--------------- No se Modifico un Pasajero! ---------------\n\n";
-            }
             break;
         case 3:
             // Agregar un Nuevo Pasajero
-            echo "Ingrese Nombre: ";
-            $nombre = trim(fgets(STDIN));     // Se introduce un nuevo nombre
+            if (count($viaje->getObjPasajeros()) <= 5) {
 
-            echo "Ingrese Apellido: ";
-            $apellido = trim(fgets(STDIN));     // Se introduce un nuevo apellido
+                echo "Ingrese Nombre: ";
+                $nombre = trim(fgets(STDIN));     // Se introduce un nuevo nombre
 
-            echo "Ingrese Numero de DNI: ";
-            $nroDni = trim(fgets(STDIN));     // Se introduce un nuevo DNI
+                echo "Ingrese Apellido: ";
+                $apellido = trim(fgets(STDIN));     // Se introduce un nuevo apellido
 
-            echo "Ingrese Numero de Telefono: ";
-            $nroTelefono = trim(fgets(STDIN));     // Se introduce un nuevo telefono
+                echo "Ingrese Numero de DNI: ";
+                $nroDni = trim(fgets(STDIN));     // Se introduce un nuevo DNI
 
-            // creacion de un nuevo objeto pasajero
-            $nuevoPasajero = new Pasajero($nombre, $apellido, $nroDni, $nroTelefono);
+                echo "Ingrese Numero de Telefono: ";
+                $nroTelefono = trim(fgets(STDIN));     // Se introduce un nuevo telefono
 
-            // Valor booleano (false = se puede agregar. True no se puede agregar)
-            $res = $viaje->agregarPasajero($nuevoPasajero);
+                // creacion de un nuevo objeto pasajero
+                $nuevoPasajero = new Pasajero($nombre, $apellido, $nroDni, $nroTelefono);
 
-            if ($res == false) {
-                echo "\n--------------- Se agrego en la lista el nuevo pasajero! ---------------\n\n";
-            } else {
-                echo "\n--------------- Esta informacion es invalida! ---------------\n";
+                // Valor booleano (false = se puede agregar. True no se puede agregar)
+                $res = $viaje->agregarPasajero($nuevoPasajero);
+
+                if ($res == false) {
+                    echo "\n--------------- Se agrego en la lista el nuevo pasajero! ---------------\n\n";
+                } else {
+                    echo "\n--------------- Esta informacion es invalida! ---------------\n";
+                }
+
             }
+            else { // si se lleno la cantidad maxima de pasajeros, no puede agregar mas
+                echo "\n--------------- No se puede agregar mas pasajeros, el viaje esta lleno. ---------------\n";
+            }
+
             break;
         case 4:
             // Corregir Datos de la Persona Responsable
@@ -100,15 +105,18 @@ do {
             if ($op == false) {
                 echo "\n--------------- Se corrigio los datos de la Persona Responsable! ---------------\n\n";
             } else {
-                echo "\n--------------- No se corrigio los datos de la Persona Responsable! ---------------\n";
+                echo "\n--------------- No se corrigio los datos de la Persona Responsable Porque Ya Existe! ---------------\n";
             }
+
             break;
         case 5:
             //Mostrar datos del viaje
             echo $viaje;
+
             break;
         default;
+            echo "\n--------------- Fin Menu ---------------\n\n";
+
             break;
     }
 } while ($num != 6);
-?>
