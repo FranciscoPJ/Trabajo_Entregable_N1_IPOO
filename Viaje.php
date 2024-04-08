@@ -130,7 +130,6 @@ class Viaje{
         // Incializacion
         $personas = $this->getObjPasajeros();
         $countPasajeros = count($personas); // valores del array
-        $totalPasajerosSugerido = $this->getCantMaximaPasajeros();
         $encontrado = false;
         $i = 0;
 
@@ -142,15 +141,18 @@ class Viaje{
 
                 $encontrado = true; // verifica que existe el pasajero en la lista
 
-                // Formula Agregar Nuevo Pasajero a la Coleccion de Pasajeros de Viaje
-                $personas[$countPasajeros] = $nuevoPasajero;
-
-                // Metodo de Acceso Set - Actualiza la lista agregando un nuevo pasajero en el viaje
-                $this->setObjPasajeros($personas);
             }
 
             $i++; // incrementa el contador
 
+        }
+
+        if($encontrado != true){
+            // Formula Agregar Nuevo Pasajero a la Coleccion de Pasajeros de Viaje
+            $personas[$countPasajeros] = $nuevoPasajero;
+
+            // Metodo de Acceso Set - Actualiza la lista agregando un nuevo pasajero en el viaje
+            $this->setObjPasajeros($personas);
         }
 
         return $encontrado;

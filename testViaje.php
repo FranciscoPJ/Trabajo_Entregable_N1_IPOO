@@ -59,14 +59,14 @@ do {
             if ($respuestaUno == true) {
                 echo "\n--------------- Se Modifico La Informacion de un Pasajero! ---------------\n\n";
             } else {
-                echo "\n--------------- No se Modifico La informacion de un Pasajero! ---------------\n\n";
+                echo "\n--------------- Este Pasajero No Existe, Disculpe La Molestia ---------------\n\n";
             }
 
             break;
         case 3:
             // Agregar un Nuevo Pasajero
-            echo "\n" . $valorObjetoPasajeros . "\n";
-            if ($valorObjetoPasajeros <> 6) {
+            echo "\n" . count($viaje->getObjPasajeros()) . "\n";
+            if (count($viaje->getObjPasajeros()) < 6) {
 
                 echo "Ingrese Nombre: ";
                 $nombre = trim(fgets(STDIN));     // Se introduce un nuevo nombre
@@ -132,5 +132,4 @@ do {
             break;
     }
 } while ($num != 6);
-
 ?>
