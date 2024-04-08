@@ -32,9 +32,7 @@
     que el pasajero no este cargado mas de una vez en el viaje. De la misma forma 
     cargue la información del responsable del viaje.
 */
-
-class Viaje
-{
+class Viaje{
 
     // Atributos
     private $codigo;
@@ -44,8 +42,7 @@ class Viaje
     private $objResponsableViaje;
 
     // Metodo Constructor
-    public function __construct($codigoViaje, $destinoViaje, $cantMax, $pasajeros, $responsableViaje)
-    {
+    public function __construct($codigoViaje, $destinoViaje, $cantMax, $pasajeros, $responsableViaje){
 
         // Inicialiazion de los Valores
         $this->codigo = $codigoViaje;
@@ -56,60 +53,49 @@ class Viaje
     }
 
     // Metodo de Acceso Get
-    public function getCodigoViaje()
-    {
+    public function getCodigoViaje(){
         return $this->codigo;
     }
 
-    public function getDestino()
-    {
+    public function getDestino(){
         return $this->destino;
     }
 
-    public function getCantMaximaPasajeros()
-    {
+    public function getCantMaximaPasajeros(){
         return $this->cantMaximaPasajeros;
     }
 
-    public function getObjPasajeros()
-    {
+    public function getObjPasajeros(){
         return $this->objPasajeros;
     }
 
-    public function getObjResponsableViaje()
-    {
+    public function getObjResponsableViaje(){
         return $this->objResponsableViaje;
     }
 
     // Metodo de Acceso Set
-    public function setCodigoViaje($nuevoCodigo)
-    {
+    public function setCodigoViaje($nuevoCodigo){
         return $this->codigo = $nuevoCodigo;
     }
 
-    public function setDestino($nuevoDestino)
-    {
+    public function setDestino($nuevoDestino){
         return $this->destino = $nuevoDestino;
     }
 
-    public function setCantMaximaPasajeros($nuevaCantidad)
-    {
+    public function setCantMaximaPasajeros($nuevaCantidad){
         return $this->cantMaximaPasajeros = $nuevaCantidad;
     }
 
-    public function setObjPasajeros($nuevosPasajeros)
-    {
+    public function setObjPasajeros($nuevosPasajeros){
         return $this->objPasajeros = $nuevosPasajeros;
     }
 
-    public function setObjResponsableViaje($nuevaPersonaR)
-    {
+    public function setObjResponsableViaje($nuevaPersonaR){
         return $this->objResponsableViaje = $nuevaPersonaR;
     }
 
     // Metodo Corregir Informacion de Pasajero
-    public function corregirInformacion($nombre, $apellido, $telefono, $nroDniBusqueda)
-    {
+    public function corregirInformacion($nombre, $apellido, $telefono, $nroDniBusqueda){
 
         // inicializacion
         $personas = $this->getObjPasajeros(); // arreglo de personas
@@ -117,7 +103,7 @@ class Viaje
         $o = 0;
 
         // busqueda para modifcar los datos de la persona asignada
-        while ($o < count($personas) && $encontrado) {
+        while ($o < count($personas) && !$encontrado) {
 
             if ($personas[$o]->getNroDni() == $nroDniBusqueda) {
 
@@ -138,32 +124,8 @@ class Viaje
 
     }
 
-    // Metodo Corregir Informacion de la Persona Responsable
-    public function corregirInformacionResponsable($numeroEmp, $numeroLic, $nombreEmp, $apellidoEmp, $numeroEmpleadoSeleccionado)
-    {
-
-        // inicializacion
-        $personaResponsable = $this->getObjResponsableViaje(); // objeto de persona responsable
-        $res = false;
-
-        if ($personaResponsable->getNroEmpleado() == $numeroEmpleadoSeleccionado) {
-
-            $res = true;
-
-            // Actualizacion de Informacion de Persona Responsable Asignado
-            $personaResponsable->setNroEmpleado($numeroEmp);
-            $personaResponsable->setNroLicencia($numeroLic);
-            $personaResponsable->setNombreEmpleado($nombreEmp);
-            $personaResponsable->setApellidoEmpleado($apellidoEmp);
-        }
-
-        return $res;
-
-    }
-
     // Metodo Agregar Pasajero
-    public function agregarPasajero($nuevoPasajero)
-    {
+    public function agregarPasajero($nuevoPasajero){
 
         // Incializacion
         $personas = $this->getObjPasajeros();
@@ -196,11 +158,33 @@ class Viaje
         }
 
         return $encontrado;
+        
+    }
+
+    // Metodo Corregir Informacion de la Persona Responsable
+    public function corregirInformacionResponsable($numeroEmp, $numeroLic, $nombreEmp, $apellidoEmp, $numeroEmpleadoSeleccionado){
+
+        // inicializacion
+        $personaResponsable = $this->getObjResponsableViaje(); // objeto de persona responsable
+        $res = false;
+
+        if ($personaResponsable->getNroEmpleado() == $numeroEmpleadoSeleccionado) {
+
+            $res = true;
+
+            // Actualizacion de Informacion de Persona Responsable Asignado
+            $personaResponsable->setNroEmpleado($numeroEmp);
+            $personaResponsable->setNroLicencia($numeroLic);
+            $personaResponsable->setNombreEmpleado($nombreEmp);
+            $personaResponsable->setApellidoEmpleado($apellidoEmp);
+        }
+
+        return $res;
+
     }
 
     // Metodo toString
-    public function __toString()
-    {
+    public function __toString(){
 
         // Inicializacion
         $pasajeros = $this->getObjPasajeros();
