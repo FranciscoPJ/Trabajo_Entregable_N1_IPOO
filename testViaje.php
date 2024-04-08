@@ -18,10 +18,9 @@ $ArregloPasajero[2] = $personaTres;
 $personaResponsable = new ResponsableV("20", "123456789", "Pedro", "Torres");
 
 // Objeto Viaje
-$viaje = new Viaje(2024090420, "Futaleufu", 5, $ArregloPasajero, $personaResponsable);
+$viaje = new Viaje(2024090420, "Futaleufu, Chile", 5, $ArregloPasajero, $personaResponsable);
 
 // Inicio del Menu ------------------------------
-
 do {
     echo "\nBienvenido al Sistema de Viaje Feliz!\n";
     echo "1. Cargar información del viaje\n";
@@ -43,13 +42,13 @@ do {
             echo "\nIngrese el numero de DNI de la persona a modificar: ";
             $modDni = trim(fgets(STDIN));
 
-            echo "\nIngrese el numero de DNI de la persona a modificar: ";
+            echo "\nIngrese un Nombre para modificar: ";
             $modNombre = trim(fgets(STDIN));
 
-            echo "\nIngrese el numero de DNI de la persona a modificar: ";
+            echo "\nIngrese un Apellido para modificar: ";
             $modApellido = trim(fgets(STDIN));
 
-            echo "\nIngrese el numero de DNI de la persona a modificar: ";
+            echo "\nIngrese un numero de telefono para modificar: ";
             $modTelefono = trim(fgets(STDIN));
 
             $respuestaUno = $viaje->corregirInformacion($modNombre, $modApellido, $modTelefono, $modDni);
@@ -58,9 +57,9 @@ do {
 
             // Se envia un mensaje de la operacion
             if ($respuestaUno == false) {
-                echo "\n--------------- Se Modifico un Pasajero! ---------------\n\n";
+                echo "\n--------------- Se Modifico La Informacion de un Pasajero! ---------------\n\n";
             } else {
-                echo "\n--------------- No se Modifico un Pasajero! ---------------\n\n";
+                echo "\n--------------- No se Modifico La informacion de un Pasajero! ---------------\n\n";
             }
 
             break;
@@ -100,7 +99,22 @@ do {
             break;
         case 4:
             // Corregir Datos de la Persona Responsable
-            $op = $viaje->corregirInformacionResponsable("14", "987654321", "Leo", "Checo", "20");
+            echo "Ingrese Nombre: ";
+            $nombreRes = trim(fgets(STDIN));     // Se introduce un nuevo nombre
+
+            echo "Ingrese Apellido: ";
+            $apellidoRes = trim(fgets(STDIN));     // Se introduce un nuevo apellido
+
+            echo "Ingrese Numero de Licencia: ";
+            $nroLicRes = trim(fgets(STDIN));     // Se introduce un nuevo DNI
+
+            echo "Ingrese Numero de Empleado: ";
+            $nroEmpRes = trim(fgets(STDIN));     // Se introduce un nuevo telefono
+
+            echo "Ingrese Numero de Empleado Para Modificar: (importante)";
+            $nroEmpResUno = trim(fgets(STDIN));     // Se introduce un nuevo telefono
+
+            $op = $viaje->corregirInformacionResponsable($nroEmpRes, $nroLicRes, $nombreRes, $apellidoRes, $nroEmpResUno );
 
             if ($op == false) {
                 echo "\n--------------- Se corrigio los datos de la Persona Responsable! ---------------\n\n";
