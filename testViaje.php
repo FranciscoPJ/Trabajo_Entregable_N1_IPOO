@@ -20,6 +20,8 @@ $personaResponsable = new ResponsableV("20", "123456789", "Pedro", "Torres");
 // Objeto Viaje
 $viaje = new Viaje(2024090420, "Futaleufu, Chile", 5, $ArregloPasajero, $personaResponsable);
 
+$valorObjetoPasajeros = count($viaje->getObjPasajeros());
+
 // Inicio del Menu ------------------------------
 do {
     echo "\nBienvenido al Sistema de Viaje Feliz!\n";
@@ -53,10 +55,8 @@ do {
 
             $respuestaUno = $viaje->corregirInformacion($modNombre, $modApellido, $modTelefono, $modDni);
 
-            echo "\n--------------- Datos Modificados! ---------------\n\n";
-
             // Se envia un mensaje de la operacion
-            if ($respuestaUno == false) {
+            if ($respuestaUno == true) {
                 echo "\n--------------- Se Modifico La Informacion de un Pasajero! ---------------\n\n";
             } else {
                 echo "\n--------------- No se Modifico La informacion de un Pasajero! ---------------\n\n";
@@ -65,7 +65,8 @@ do {
             break;
         case 3:
             // Agregar un Nuevo Pasajero
-            if (count($viaje->getObjPasajeros()) <= 5) {
+            echo "\n" . $valorObjetoPasajeros . "\n";
+            if ($valorObjetoPasajeros <> 6) {
 
                 echo "Ingrese Nombre: ";
                 $nombre = trim(fgets(STDIN));     // Se introduce un nuevo nombre
@@ -111,12 +112,9 @@ do {
             echo "Ingrese Numero de Empleado: ";
             $nroEmpRes = trim(fgets(STDIN));     // Se introduce un nuevo telefono
 
-            echo "Ingrese Numero de Empleado Para Modificar: (importante)";
-            $nroEmpResUno = trim(fgets(STDIN));     // Se introduce un nuevo telefono
+            $op = $viaje->corregirInformacionResponsable($nroEmpRes, $nroLicRes, $nombreRes, $apellidoRes);
 
-            $op = $viaje->corregirInformacionResponsable($nroEmpRes, $nroLicRes, $nombreRes, $apellidoRes, $nroEmpResUno );
-
-            if ($op == false) {
+            if ($op == 0) {
                 echo "\n--------------- Se corrigio los datos de la Persona Responsable! ---------------\n\n";
             } else {
                 echo "\n--------------- No se corrigio los datos de la Persona Responsable Porque Ya Existe! ---------------\n";
@@ -134,3 +132,5 @@ do {
             break;
     }
 } while ($num != 6);
+
+?>

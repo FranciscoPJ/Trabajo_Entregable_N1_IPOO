@@ -135,42 +135,38 @@ class Viaje{
         $i = 0;
 
         // Recorrido para verifiacar si los datos no estan existente
-        while ($i < $countPasajeros && !$encontrado && $countPasajeros < $totalPasajerosSugerido) {
+        while ($i < $countPasajeros && !$encontrado) {
 
             // Si nroDni son iguales, no se guarda el nuevo pasajero (true). Se guarda caso contrario (false).
             if ($personas[$i]->getNroDni() == $nuevoPasajero->getNroDni()) {
 
                 $encontrado = true; // verifica que existe el pasajero en la lista
 
+                // Formula Agregar Nuevo Pasajero a la Coleccion de Pasajeros de Viaje
+                $personas[$countPasajeros] = $nuevoPasajero;
+
+                // Metodo de Acceso Set - Actualiza la lista agregando un nuevo pasajero en el viaje
+                $this->setObjPasajeros($personas);
             }
 
             $i++; // incrementa el contador
 
         }
 
-        if ($encontrado == false && $countPasajeros <= $totalPasajerosSugerido) {
-
-            // Formula Agregar Nuevo Pasajero a la Coleccion de Pasajeros de Viaje
-            $personas[$countPasajeros] = $nuevoPasajero;
-
-            // Metodo de Acceso Set - Actualiza la lista agregando un nuevo pasajero en el viaje
-            $this->setObjPasajeros($personas);
-        }
-
         return $encontrado;
-        
+
     }
 
     // Metodo Corregir Informacion de la Persona Responsable
-    public function corregirInformacionResponsable($numeroEmp, $numeroLic, $nombreEmp, $apellidoEmp, $numeroEmpleadoSeleccionado){
+    public function corregirInformacionResponsable($numeroEmp, $numeroLic, $nombreEmp, $apellidoEmp){
 
         // inicializacion
         $personaResponsable = $this->getObjResponsableViaje(); // objeto de persona responsable
-        $res = false;
+        $y = 1;
 
-        if ($personaResponsable->getNroEmpleado() == $numeroEmpleadoSeleccionado) {
+        if($personaResponsable->getNroEmpleado() != $numeroEmp){
 
-            $res = true;
+            $y = 0;
 
             // Actualizacion de Informacion de Persona Responsable Asignado
             $personaResponsable->setNroEmpleado($numeroEmp);
@@ -179,7 +175,7 @@ class Viaje{
             $personaResponsable->setApellidoEmpleado($apellidoEmp);
         }
 
-        return $res;
+        return $y;
 
     }
 
