@@ -27,24 +27,45 @@ do {
     echo "1. Cargar información del viaje\n";
     echo "2. Modificar datos del pasajero\n";
     echo "3. Agregar pasajero\n";
-    echo "4. Mostrar datos del viaje\n";
-    echo "5. Salir\n";
+    echo "4. Modificar datos de la Persona Responsable\n";
+    echo "5. Mostrar datos del viaje\n";
+    echo "6. Salir\n";
     $num = trim(fgets(STDIN)); // se elige un numero del menu
 
     switch ($num) {
         case 1:
             // Cargar información del viaje
-            // Ya las variables instancia del viaje estan creadas
             echo "Información del viaje cargada.\n";
             echo $viaje;
             break;
         case 2:
-            // Modificar datos del pasajero
             // Modificar Informacion de un Pasajero
-            $viaje->corregirInformacion("Lucas", "Stuart", "2995432134", 1);
-            $viaje->corregirInformacion("Ezequiel", "Gonzales", "2997658909", 2);
-            $viaje->corregirInformacion("Federico", "Kano", "2991234567", 3);
-            echo "Los Datos se modificaron.\n";
+            $respuestaUno = $viaje->corregirInformacion("Lucas", "Stuart", "2995432134", "2995920060");
+            
+            // Se envia un mensaje de la operacion
+            if ($respuestaUno == false) {
+                echo "\n--------------- Se Modifico un Pasajero! ---------------\n\n";
+            } else {
+                echo "\n--------------- No se Modifico un Pasajero! ---------------\n\n";
+            }
+
+            $respuestaDos = $viaje->corregirInformacion("Ezequiel", "Gonzales", "2997658909", "2995449923");
+
+            // Se envia un mensaje de la operacion
+            if ($respuestaDos == false) {
+                echo "\n--------------- Se Modifico un Pasajero! ---------------\n\n";
+            } else {
+                echo "\n--------------- No se Modifico un Pasajero! ---------------\n\n";
+            }
+
+            $respuestaTres = $viaje->corregirInformacion("Federico", "Kano", "2991234567", "2994569832");
+
+            // Se envia un mensaje de la operacion
+            if ($respuestaTres == false) {
+                echo "\n--------------- Se Modifico un Pasajero! ---------------\n\n";
+            } else {
+                echo "\n--------------- No se Modifico un Pasajero! ---------------\n\n";
+            }
             break;
         case 3:
             // Agregar un Nuevo Pasajero
@@ -68,18 +89,26 @@ do {
 
             if ($res == false) {
                 echo "\n--------------- Se agrego en la lista el nuevo pasajero! ---------------\n\n";
-                $ArregloPasajero[count($ArregloPasajero)] = $viaje->getObjPasajeros()[count($ArregloPasajero)];
             } else {
                 echo "\n--------------- Esta informacion es invalida! ---------------\n";
             }
             break;
         case 4:
+            // Corregir Datos de la Persona Responsable
+            $op = $viaje->corregirInformacionResponsable("14", "987654321", "Leo", "Checo", "20");
+
+            if ($op == false) {
+                echo "\n--------------- Se corrigio los datos de la Persona Responsable! ---------------\n\n";
+            } else {
+                echo "\n--------------- No se corrigio los datos de la Persona Responsable! ---------------\n";
+            }
+            break;
+        case 5:
             //Mostrar datos del viaje
             echo $viaje;
             break;
         default;
-            echo "\nFin del Menu.\n";
             break;
     }
-} while ($num !=5);
+} while ($num != 6);
 ?>

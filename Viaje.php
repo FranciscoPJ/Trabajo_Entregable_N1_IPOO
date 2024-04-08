@@ -33,7 +33,8 @@
     cargue la información del responsable del viaje.
 */
 
-class Viaje{
+class Viaje
+{
 
     // Atributos
     private $codigo;
@@ -41,9 +42,10 @@ class Viaje{
     private $cantMaximaPasajeros;
     private $objPasajeros;
     private $objResponsableViaje;
-    
+
     // Metodo Constructor
-    public function __construct($codigoViaje, $destinoViaje, $cantMax, $pasajeros, $responsableViaje){
+    public function __construct($codigoViaje, $destinoViaje, $cantMax, $pasajeros, $responsableViaje)
+    {
 
         // Inicialiazion de los Valores
         $this->codigo = $codigoViaje;
@@ -51,67 +53,114 @@ class Viaje{
         $this->cantMaximaPasajeros = $cantMax;
         $this->objPasajeros = $pasajeros;
         $this->objResponsableViaje = $responsableViaje;
-
     }
 
     // Metodo de Acceso Get
-    public function getCodigoViaje(){
+    public function getCodigoViaje()
+    {
         return $this->codigo;
     }
 
-    public function getDestino(){
+    public function getDestino()
+    {
         return $this->destino;
     }
 
-    public function getCantMaximaPasajeros(){
+    public function getCantMaximaPasajeros()
+    {
         return $this->cantMaximaPasajeros;
     }
 
-    public function getObjPasajeros(){
+    public function getObjPasajeros()
+    {
         return $this->objPasajeros;
     }
 
-    public function getObjResponsableViaje(){
+    public function getObjResponsableViaje()
+    {
         return $this->objResponsableViaje;
     }
 
     // Metodo de Acceso Set
-    public function setCodigoViaje($nuevoCodigo){
+    public function setCodigoViaje($nuevoCodigo)
+    {
         return $this->codigo = $nuevoCodigo;
     }
 
-    public function setDestino($nuevoDestino){
+    public function setDestino($nuevoDestino)
+    {
         return $this->destino = $nuevoDestino;
     }
 
-    public function setCantMaximaPasajeros($nuevaCantidad){
+    public function setCantMaximaPasajeros($nuevaCantidad)
+    {
         return $this->cantMaximaPasajeros = $nuevaCantidad;
     }
 
-    public function setObjPasajeros($nuevosPasajeros){
+    public function setObjPasajeros($nuevosPasajeros)
+    {
         return $this->objPasajeros = $nuevosPasajeros;
     }
 
-    public function setObjResponsableViaje($nuevaPersonaR){
+    public function setObjResponsableViaje($nuevaPersonaR)
+    {
         return $this->objResponsableViaje = $nuevaPersonaR;
     }
 
     // Metodo Corregir Informacion de Pasajero
-    public function corregirInformacion($nombre, $apellido, $telefono, $nroPersona){
+    public function corregirInformacion($nombre, $apellido, $telefono, $nroDniBusqueda)
+    {
 
         // inicializacion
         $personas = $this->getObjPasajeros(); // arreglo de personas
-        $num = $nroPersona - 1;
+        $encontrado = false;
+        $o = 0;
 
-        // Actualizacion de Informacion de Pasajero Asignado
-        $personas[$num]->setNombre($nombre);
-        $personas[$num]->setApellido($apellido);
-        $personas[$num]->setTelefono($telefono);
+        // busqueda para modifcar los datos de la persona asignada
+        while ($o < count($personas) && !$encontrado) {
+
+            if ($personas[$o]->getNroDni() == $nroDniBusqueda) {
+
+                // Se encontro la persona a modificar sus datos
+                $encontrado = true;
+
+                // Actualizacion de Informacion de Pasajero Asignado
+                $personas[$o]->setNombre($nombre);
+                $personas[$o]->setApellido($apellido);
+                $personas[$o]->setTelefono($telefono);
+            }
+        }
+
+        return $encontrado;
+
+    }
+
+    // Metodo Corregir Informacion de la Persona Responsable
+    public function corregirInformacionResponsable($numeroEmp, $numeroLic, $nombreEmp, $apellidoEmp, $numeroEmpleadoSeleccionado)
+    {
+
+        // inicializacion
+        $personaResponsable = $this->getObjResponsableViaje(); // objeto de persona responsable
+        $res = false;
+
+        if ($personaResponsable->getNroEmpleado() == $numeroEmpleadoSeleccionado) {
+
+            $res = true;
+
+            // Actualizacion de Informacion de Persona Responsable Asignado
+            $personaResponsable->setNroEmpleado($numeroEmp);
+            $personaResponsable->setNroLicencia($numeroLic);
+            $personaResponsable->setNombreEmpleado($nombreEmp);
+            $personaResponsable->setApellidoEmpleado($apellidoEmp);
+        }
+
+        return $res;
 
     }
 
     // Metodo Agregar Pasajero
-    public function agregarPasajero($nuevoPasajero){
+    public function agregarPasajero($nuevoPasajero)
+    {
 
         // Incializacion
         $personas = $this->getObjPasajeros();
@@ -120,10 +169,10 @@ class Viaje{
         $i = 0;
 
         // Recorrido para verifiacar si los datos no estan existente
-        while($i < $countPasajeros && !$encontrado){
+        while ($i < $countPasajeros && !$encontrado) {
 
             // Si nroDni son iguales, no se guarda el nuevo pasajero (true). Se guarda caso contrario (false).
-            if($personas[$i]->getNroDni() == $nuevoPasajero->getNroDni()){
+            if ($personas[$i]->getNroDni() == $nuevoPasajero->getNroDni()) {
 
                 $encontrado = true; // verifica que existe el pasajero en la lista
 
@@ -133,7 +182,7 @@ class Viaje{
 
         }
 
-        if($encontrado == false){
+        if ($encontrado == false) {
 
             // Formula Agregar Nuevo Pasajero a la Coleccion de Pasajeros de Viaje
             $personas[$countPasajeros] = $nuevoPasajero;
@@ -141,16 +190,15 @@ class Viaje{
             // Metodo de Acceso Set - Actualiza la lista agregando un nuevo pasajero en el viaje
             $this->setObjPasajeros($personas);
             $this->setCantMaximaPasajeros(count($personas));
-
         }
 
         return $encontrado;
-
     }
 
     // Metodo toString
-    public function __toString(){
-        
+    public function __toString()
+    {
+
         // Inicializacion
         $pasajeros = $this->getObjPasajeros();
         $resPersona = $this->getObjResponsableViaje();
@@ -159,7 +207,7 @@ class Viaje{
         $info .= "  Destino del Viaje: " . $this->getDestino() . ".\n\n";
         $info .= "  Cantidad Max de Pasajeros: " . $this->getCantMaximaPasajeros() . ".\n\n";
         $info .= "  Informacion de Pasajeros:\n\n";
-        for ($i = 0; $i < $this->getCantMaximaPasajeros(); $i++){
+        for ($i = 0; $i < $this->getCantMaximaPasajeros(); $i++) {
             $info .= "       Pasajero N°" . ($i + 1) . ":\n";
             $info .= "       Nombre: " . $pasajeros[$i]->getNombre() . ".\n";
             $info .= "       Apellido: " . $pasajeros[$i]->getApellido() . ".\n";
@@ -173,7 +221,5 @@ class Viaje{
         $info .= "       Numero de Empleado: " . $resPersona->getNroEmpleado() . ".\n\n";
 
         return $info;
-
     }
-
 }
