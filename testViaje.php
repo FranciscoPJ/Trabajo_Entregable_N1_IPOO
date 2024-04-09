@@ -36,7 +36,7 @@ $viaje = new Viaje(2024090420, "Futaleufu, Chile", $capacidadMaxima, $arregloPas
 do {
     // opciones del menu
     echo "\nBienvenido al Sistema de Viaje Feliz!\n";
-    echo "1. Cargar información inicial del viaje\n";
+    echo "1. Mostrar información inicial del viaje\n";
     echo "2. Modificar datos del pasajero\n";
     echo "3. Agregar pasajero\n";
     echo "4. Modificar datos de la Persona Responsable\n";
@@ -138,8 +138,12 @@ do {
             echo $viaje;
 
             break;
-        default; // si $num es 6 se termina la consola de ejecutarse
+        case 6: // Salir del Menu
             echo "\n--------------- Fin Menu ---------------\n\n";
+
+            break;
+        default; // si $num es 6 se termina la consola de ejecutarse
+            echo "\n--------------- Error Numero Seleccionado ---------------\n\n";
 
             break;
     }
