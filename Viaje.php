@@ -143,6 +143,38 @@ class Viaje{
         return $this->objResponsableViaje = $nuevaPersonaR;
     }
 
+    /** Metodo toString.
+     * Retorna una cadena de carateres de todos los atributos
+     * @return STRING */
+    public function __toString(){
+        // STRING $info
+        // INT $i
+
+        // Inicializacion
+        $pasajeros = $this->getObjPasajeros();
+        $resPersona = $this->getObjResponsableViaje();
+
+        $info = "\nInformacion del Viaje:\n\n";
+        $info .= "  Codigo del Viaje: " . $this->getCodigoViaje() . ".\n\n";
+        $info .= "  Destino del Viaje: " . $this->getDestino() . ".\n\n";
+        $info .= "  Cantidad Max de Pasajeros: " . $this->getCantMaximaPasajeros() . ".\n\n";
+        $info .= "  Informacion de Pasajeros:\n\n";
+        for ($i = 0; $i < count($pasajeros); $i++) {
+            $info .= "       Pasajero N°" . ($i + 1) . ":\n";
+            $info .= "       Nombre: " . $pasajeros[$i]->getNombre() . ".\n";
+            $info .= "       Apellido: " . $pasajeros[$i]->getApellido() . ".\n";
+            $info .= "       Numero de DNI: " . $pasajeros[$i]->getNroDni() . ".\n";
+            $info .= "       Numero de Telefono: " . $pasajeros[$i]->getTelefono() . ".\n\n";
+        }
+        $info .= "  Informacion de la Persona Responsable de Realizar el Viaje:\n\n";
+        $info .= "       Nombre: " . $resPersona->getNombreEmpleado() . ".\n";
+        $info .= "       Apellido: " . $resPersona->getApellidoEmpleado() . ".\n";
+        $info .= "       Numero de Licencia: " . $resPersona->getNroLicencia() . ".\n";
+        $info .= "       Numero de Empleado: " . $resPersona->getNroEmpleado() . ".\n\n";
+
+        return $info;
+    }
+
     /** Metodo Corregir Informacion de Pasajero
      * Recibe como parametro datos para modificar la informacion 
      * de un pasajero, excepto el numero de DNI.
@@ -259,37 +291,5 @@ class Viaje{
 
         return $y;
 
-    }
-
-    /** Metodo toString.
-     * Retorna una cadena de carateres de todos los atributos
-     * @return STRING */
-    public function __toString(){
-        // STRING $info
-        // INT $i
-
-        // Inicializacion
-        $pasajeros = $this->getObjPasajeros();
-        $resPersona = $this->getObjResponsableViaje();
-
-        $info = "\nInformacion del Viaje:\n\n";
-        $info .= "  Codigo del Viaje: " . $this->getCodigoViaje() . ".\n\n";
-        $info .= "  Destino del Viaje: " . $this->getDestino() . ".\n\n";
-        $info .= "  Cantidad Max de Pasajeros: " . $this->getCantMaximaPasajeros() . ".\n\n";
-        $info .= "  Informacion de Pasajeros:\n\n";
-        for ($i = 0; $i < count($pasajeros); $i++) {
-            $info .= "       Pasajero N°" . ($i + 1) . ":\n";
-            $info .= "       Nombre: " . $pasajeros[$i]->getNombre() . ".\n";
-            $info .= "       Apellido: " . $pasajeros[$i]->getApellido() . ".\n";
-            $info .= "       Numero de DNI: " . $pasajeros[$i]->getNroDni() . ".\n";
-            $info .= "       Numero de Telefono: " . $pasajeros[$i]->getTelefono() . ".\n\n";
-        }
-        $info .= "  Informacion de la Persona Responsable de Realizar el Viaje:\n\n";
-        $info .= "       Nombre: " . $resPersona->getNombreEmpleado() . ".\n";
-        $info .= "       Apellido: " . $resPersona->getApellidoEmpleado() . ".\n";
-        $info .= "       Numero de Licencia: " . $resPersona->getNroLicencia() . ".\n";
-        $info .= "       Numero de Empleado: " . $resPersona->getNroEmpleado() . ".\n\n";
-
-        return $info;
     }
 }
