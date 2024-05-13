@@ -166,11 +166,9 @@ class Viaje{
             $info .= "       Numero de DNI: " . $pasajeros[$i]->getNroDni() . ".\n";
             $info .= "       Numero de Telefono: " . $pasajeros[$i]->getTelefono() . ".\n\n";
         }
-        $info .= "  Informacion de la Persona Responsable de Realizar el Viaje:\n\n";
-        $info .= "       Nombre: " . $resPersona->getNombreEmpleado() . ".\n";
-        $info .= "       Apellido: " . $resPersona->getApellidoEmpleado() . ".\n";
-        $info .= "       Numero de Licencia: " . $resPersona->getNroLicencia() . ".\n";
-        $info .= "       Numero de Empleado: " . $resPersona->getNroEmpleado() . ".\n\n";
+        $info .= "  Informacion de la Persona Responsable de Realizar el Viaje:\n";
+        $info .= $this->getObjResponsableViaje();
+
 
         return $info;
     }
